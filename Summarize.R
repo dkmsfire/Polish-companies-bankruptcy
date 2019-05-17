@@ -22,6 +22,13 @@ data = year1[,-65]
 data = as.matrix(data)
 heatmap(data)
 
-select = data[,c(7,48,49,20,37,40,46,47,50,4,17,29,57,8,10,53)]
+select = year1[,c(7,48,49,20,37,40,46,47,50,4,17,29,57,8,10,53)]
 heatmap(select)
 ## LDA
+
+## Correlation Matrix
+res = cor(select, method = "pearson", use = "complete.obs")
+library(corrplot)
+corrplot(res, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45)
+
