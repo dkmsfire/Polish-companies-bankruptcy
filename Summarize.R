@@ -22,9 +22,16 @@ data = year1[,-65]
 data = as.matrix(data)
 heatmap(data)
 
-select = year1[,c(7,48,49,20,37,40,46,47,50,4,17,29,57,8,10,53)]
+select = year1[,c(7,48,49,20,37,40,46,47,50,4,17,29,57,8,10,53,65)]
 heatmap(select)
-## LDA
+
+## LDA need to figure out na , how to do the imputation
+library(MASS)
+train_index = sample(1:7027, 5600)
+model = lda(class ~ ., data = select, subset = train_index)
+predict(model, test)
+test = select[-train_index,-17]
+
 
 ## Correlation Matrix
 res = cor(select, method = "pearson", use = "complete.obs")
