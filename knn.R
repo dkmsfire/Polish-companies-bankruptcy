@@ -24,13 +24,15 @@ bankruptcy <- year1[,65]
 standardized.year1 <- scale(year1[,-65])
 var(standardized.year1[,1])
 
+select = standardized.year1[,c(7,48,49,20,37,40,46,47,50,4,17,29,57,8,10,53)]
+
 #把前1000橫排作為測試資料
-test.index <- sample(1:nrow(year1), 1000)
-test.data <- standardized.year1[test.index,]
+test.index <- sample(1:nrow(select), 1000)
+test.data <- select[test.index,]
 test.bankruptcy <- bankruptcy[test.index]
 
 #剩餘則作為訓練組
-train.data <- standardized.year1[-test.index,]
+train.data <- select[-test.index,]
 train.bankruptcy <- bankruptcy[-test.index]
 
 #knn about k = 3 and get very hign accuracy like 0.95
@@ -51,3 +53,4 @@ k.values <- 1:20
 error.df <- data.frame(error.rate,k.values)
 error.df
 ggplot(error.df,aes(x=k.values,y=error.rate)) + geom_point()+ geom_line(lty="dotted",color='red')
+
