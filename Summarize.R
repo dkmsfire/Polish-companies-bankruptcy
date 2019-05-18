@@ -62,7 +62,7 @@ library(corrplot)
 
 for(i in 1:5){
   res = cor(bankruptcy[[i]][1:64], method = "pearson", use = "complete.obs")
-  corrplot(res, type = "upper", order = "hclust", tl.col = "black", tl.srt = 45)
+  corrplot(res, type = "upper", tl.col = "black", tl.srt = 45)
 }
 
 
