@@ -6,6 +6,11 @@ for(i in 1:5){
   assign(paste0("year", i), read.arff(paste0("data/", i, "year.arff")))
 }
 
+## na imputation by mean
+for(i in 1:ncol(year1)) {
+  year1[ , i][is.na(year1[ , i])] <- mean(year1[ , i], na.rm = TRUE)
+}
+
 ## plot each variable to column 1
 par(mfrow = c(2,2))
 for(i in 1:64){
@@ -22,16 +27,24 @@ data = year1[,-65]
 data = as.matrix(data)
 heatmap(data)
 
-select = year1[,c(7,48,49,20,37,40,46,47,50,4,17,29,57,8,10,53,65)]
+select = year1[,c(7,48,49,20,37,40,46,47,50,4,17,29,57,8,10,53)]
 heatmap(select)
 
 ## LDA need to figure out na , how to do the imputation
 library(MASS)
 train_index = sample(1:7027, 5600)
-model = lda(class ~ ., data = select, subset = train_index)
+model = lda(class ~ ., data = year1, na.action="na.omit", CV=TRUE)
 predict(model, test)
 test = select[-train_index,-17]
 
+## PCA
+library(ggbiplot)
+pca = prcomp(select, scale = TRUE)
+plot(pca, type = "line")
+abline(h = 1, col = "blue")
+
+#plot ggbiplot
+ggbiplot(pca, obs.scale = 1, var.scale = 1, groups = year1[[65]], ellipse = TRUE, circle = TRUE)
 
 ## Correlation Matrix
 res = cor(select, method = "pearson", use = "complete.obs")
@@ -39,3 +52,4 @@ library(corrplot)
 corrplot(res, type = "upper", order = "hclust", 
          tl.col = "black", tl.srt = 45)
 
+## 
