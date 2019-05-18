@@ -1,0 +1,19 @@
+
+X7	EBIT / total assets
+X48	EBITDA (profit on operating activities - depreciation) / total assets 
+X49	EBITDA (profit on operating activities - depreciation) / sales 
+X20	(inventory * 365) / sales 
+X37	(current assets - inventories) / long-term liabilities 
+X40	(current assets - inventory - receivables) / short-term liabilities 
+X46	(current assets - inventory) / short-term liabilities 
+X47	(inventory * 365) / cost of products sold 
+X50	current assets / total liabilities 
+X4	current assets / short-term liabilities 
+X17	total assets / total liabilities
+X29	logarithm of total assets 
+X57	(current assets - inventory - short-term liabilities) / (sales - gross profit - depreciation) 
+X8	book value of equity / total liabilities 
+X10	equity / total assets 
+X53	equity / fixed assets 
+
+
