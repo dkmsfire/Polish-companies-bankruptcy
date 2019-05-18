@@ -5,8 +5,19 @@ library(foreign)
 for(i in 1:5){
   assign(paste0("year", i), read.arff(paste0("data/", i, "year.arff")))
 }
+bankruptcy = list(year1, year2, year3, year4, year5)
 
 ## na imputation by mean
+for(i in 1:5){
+  for(j in 1:ncol(bankruptcy[[i]])){
+    bankruptcy[[i]][,j][is.na(bankruptcy[[i]][,j])] = mean(bankruptcy[[i]][,j], na.rm = TRUE)
+  }
+}
+
+for(i in 1:5){
+  print(any(is.na(bankruptcy[[i]])))
+}
+
 for(i in 1:ncol(year1)) {
   year1[ , i][is.na(year1[ , i])] <- mean(year1[ , i], na.rm = TRUE)
 }
@@ -47,9 +58,12 @@ abline(h = 1, col = "blue")
 ggbiplot(pca, obs.scale = 1, var.scale = 1, groups = year1[[65]], ellipse = TRUE, circle = TRUE)
 
 ## Correlation Matrix
-res = cor(select, method = "pearson", use = "complete.obs")
 library(corrplot)
-corrplot(res, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45)
+
+for(i in 1:5){
+  res = cor(bankruptcy[[i]][1:64], method = "pearson", use = "complete.obs")
+  corrplot(res, type = "upper", order = "hclust", tl.col = "black", tl.srt = 45)
+}
+
 
 ## 
