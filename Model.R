@@ -4,4 +4,10 @@
 ### So , in this classfier question , 
 ### we need to use sensitivity and specificity to check our model.
 
-###
+### knn for na imputation
+
+### smote sampling for unbalanced data
+
+### corrplot for dimension reduction
+
+### random forest
