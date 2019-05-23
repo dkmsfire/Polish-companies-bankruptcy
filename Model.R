@@ -11,3 +11,5 @@
 ### corrplot for dimension reduction
 
 ### random forest
+
+### if we rbind year1 to year5, can we predict the data come from which year preciously.
