@@ -1,3 +1,8 @@
+### in this real life case, knn should be a good method to do, 
+### but still need to consider the unbalanced problem.
+### so, we need to use sensitivity to show how good is our model.
+
+
 ###packages
 library(foreign)
 library(ISLR)
