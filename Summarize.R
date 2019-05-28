@@ -73,10 +73,14 @@ for(i in 1:ncol(year1)) {
 }
 
 ## plot each variable to column 1
-par(mfrow = c(2,2))
-for(i in 1:64){
-  plot(y = year1[[i]], x = year1[[1]], col = year1$class)
+load("bankruptcy_knn.rda")
+par(mfrow = c(4,4))
+for(i in 1:5){
+  for(j in 1:64){
+    plot(bankruptcy_knn[[i]][[j]], col = bankruptcy_knn[[i]][[65]], ylab = paste("Attribute", j), main = paste("Year", i, "Attribute", j))
+  }
 }
+
 
 ## heat map
 for(i in 1:64){
