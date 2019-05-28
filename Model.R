@@ -20,6 +20,8 @@ for(k in 2:5){
 }
 save(bankruptcy_all, file = "bankruptcy_all.rda")
 
+bankruptcy_all_knn = rbind(year1_knn, year2_knn, year3_knn, year4_knn, year5_knn)
+save(bankruptcy_all_knn, file = "bankruptcy_all_knn.rda")
 ### knn for na imputation
 require(DMwR)
 load("bankruptcy.rda")
@@ -68,8 +70,12 @@ for(i in 1:5){
 load("bankruptcy_all.rda")
 
 ## knn for na imputation
-bankruptcy_all_knn = knnImputation(bankruptcy_all)
+library(randomForest)
+load("bankruptcy_all_knn.rda")
 trainid = sample(1:nrow(bankruptcy_all_knn), 0.8 * nrow(bankruptcy_all_knn))
 train = bankruptcy_all_knn[trainid, c(1:64, 66)]
 test = bankruptcy_all_knn[-trainid, c(1:64, 66)]
 model = randomForest(year ~ ., data = train)
+
+pred_test = predict(model, test, type = "response")
+mean(pred_test == test$year)
