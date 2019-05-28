@@ -43,8 +43,25 @@ for(i in 1:5){
 }
 
 ### random forest
+library(randomForest)
+library(caret)
+load("bankruptcy_knn.rda")
+feature = matrix(0L, nrow = 3, ncol = 5)
+colnames(feature) = c("year1", "year2", "year3", "year4", "year5")
+rownames(feature) = c("Accuracy", "Sensitivity", "Specificity")
 for(i in 1:5){
-  
+  set.seed(999)
+  trainid = sample(1:nrow(bankruptcy_knn[[i]]), 0.8 * nrow(bankruptcy_knn[[i]]))
+  train = bankruptcy_knn[[i]][trainid,]
+  test = bankruptcy_knn[[i]][-trainid,]
+  model = randomForest(class ~ ., data = train, importance = TRUE, ntree = 10)
+  pred_test = predict(model, test, type = "response")
+  value = c(mean(pred_test == test$class), specificity(pred_test, test$class), sensitivity(pred_test, test$class))
+  for(j in 1:3){
+    feature[j,i] = value[[j]]
+  }
+  assign(paste0("matrix_year", i), confusionMatrix(pred_test, test$class))
+  assign(paste0("importance_year", i), importance(model))
 }
 
 ### if we rbind year1 to year5, can we predict the data come from which year preciously.
