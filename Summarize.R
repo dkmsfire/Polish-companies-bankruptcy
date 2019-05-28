@@ -55,7 +55,20 @@ percentage.plot <- missing.values %>%
 
 percentage.plot
 
+## na detection and want to add a variable to record if else na exists.
+load("bankruptcy.rda")
+for(i in 1:5){
+  for(j in 1:nrow(bankruptcy[[i]])){
+    bankruptcy[[i]]$na[j] = any(is.na(bankruptcy[[i]][j,]))
+  }
+}
 
+bankruptcy_na = bankruptcy
+for(i in 1:5){
+  bankruptcy_na[[i]] = knnImputation(bankruptcy_na[[i]])
+}
+
+save(bankruptcy_na, file = "bankruptcy_na_knn.rda")
 
 ## na imputation by mean
 for(i in 1:5){
