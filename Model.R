@@ -48,6 +48,8 @@ for(i in 1:5){
 library(randomForest)
 library(caret)
 load("bankruptcy_knn.rda")
+load("bankruptcy_na_knn.rda")
+bankruptcy_knn = bankruptcy_na
 feature = matrix(0L, nrow = 3, ncol = 5)
 colnames(feature) = c("year1", "year2", "year3", "year4", "year5")
 rownames(feature) = c("Accuracy", "Sensitivity", "Specificity")
