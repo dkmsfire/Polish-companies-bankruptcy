@@ -4,9 +4,6 @@
 ### So , in this classfier question , 
 ### we need to use sensitivity and specificity to check our model.
 library(foreign)
-
-### knn for na imputation
-require(DMwR)
 for(i in 1:5){
   assign(paste0("year", i), read.arff(paste0("data/", i, "year.arff")))
 }
@@ -22,6 +19,13 @@ for(k in 2:5){
   bankruptcy_all = rbind(bankruptcy_all, bankruptcy[[k]])
 }
 save(bankruptcy_all, file = "bankruptcy_all.rda")
+
+### knn for na imputation
+require(DMwR)
+for(i in 1:5){
+  assign(paste0("year", i, "_knn"), knnImputation(bankruptcy[[i]]))
+}
+any(is.na(year1_knn))
 
 ### smote sampling for unbalanced data
 
