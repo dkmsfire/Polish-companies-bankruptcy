@@ -95,10 +95,20 @@ for(i in 1:5){
 }
 
 ## boxplot to display each year.
-load("bankruptcy_all_knn.rda")
+load("data/bankruptcy_all_knn.rda")
 par(mfrow = c(4,4))
 for(j in 1:64){
   boxplot(bankruptcy_all_knn[[j]] ~ bankruptcy_all_knn[[66]], col = factor(bankruptcy_all_knn[[66]]), main = paste0("Attribute", j), ylab = paste0("Attribute", j))
+}
+
+bankruptcy_all_knn_yes = bankruptcy_all_knn[which(bankruptcy_all_knn$class == 1),]
+for(j in 1:64){
+  boxplot(bankruptcy_all_knn_yes[[j]] ~ bankruptcy_all_knn_yes[[66]], col = factor(bankruptcy_all_knn_yes[[66]]), main = paste0("Attribute", j), ylab = paste0("Attribute", j))
+}
+
+bankruptcy_all_knn_no = bankruptcy_all_knn[which(bankruptcy_all_knn$class == 0),]
+for(j in 1:64){
+  boxplot(bankruptcy_all_knn_no[[j]] ~ bankruptcy_all_knn_no[[66]], col = factor(bankruptcy_all_knn_no[[66]]), main = paste0("Attribute", j), ylab = paste0("Attribute", j))
 }
 
 
