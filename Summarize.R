@@ -139,12 +139,13 @@ for(i in 1:5){
   
   #Create x,y refs 
   data.x <- data.mds[,1] 
-  data.y <- data.mds[,2] 
+  data.y <- -data.mds[,2] 
   
   #Plot 
   plot(data.x, data.y, col=as.integer(bankruptcy_knn[[i]]$class)) 
   
 }
+
 ## MDS 3d
 library(rgl)
 #Caclulate Dist. 
