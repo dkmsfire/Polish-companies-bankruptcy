@@ -65,3 +65,11 @@ for(i in 1:5){
 }
 
 ### if we rbind year1 to year5, can we predict the data come from which year preciously.
+load("bankruptcy_all.rda")
+
+## knn for na imputation
+bankruptcy_all_knn = knnImputation(bankruptcy_all)
+trainid = sample(1:nrow(bankruptcy_all_knn), 0.8 * nrow(bankruptcy_all_knn))
+train = bankruptcy_all_knn[trainid, c(1:64, 66)]
+test = bankruptcy_all_knn[-trainid, c(1:64, 66)]
+model = randomForest(year ~ ., data = train)
