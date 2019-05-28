@@ -129,3 +129,35 @@ plot(x, y, xlab="Coordinate 1", ylab="Coordinate 2", main="Metric MDS", type="n"
 text(x, y, labels = row.names(year1), cex = 0.7)
 
 ## MDS 3d
+load("bankruptcy_knn.rda")
+for(i in 1:5){
+  #Caclulate Dist. 
+  data.dist <- dist(bankruptcy_knn[[i]][1:64]) 
+  
+  #Calculate MDS 
+  data.mds <- cmdscale(data.dist, k=2) 
+  
+  #Create x,y refs 
+  data.x <- data.mds[,1] 
+  data.y <- data.mds[,2] 
+  
+  #Plot 
+  plot(data.x, data.y, col=as.integer(bankruptcy_knn[[i]]$class)) 
+  
+}
+## MDS 3d
+library(rgl)
+#Caclulate Dist. 
+data.dist <- dist(bankruptcy_knn[[1]][1:64]) 
+
+#Calculate MDS 
+data.mds <- cmdscale(data.dist, k=3) 
+
+#Create x,y refs 
+data.x <- data.mds[,1] 
+data.y <- data.mds[,2] 
+data.z <- data.mds[,3] 
+
+#Plot 
+plot3d(data.x, data.y, data.z, col=as.integer(bankruptcy_knn[[1]]$class)) 
+### 3d plot the data only are on y-z axis, x = 0
