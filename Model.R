@@ -22,15 +22,29 @@ save(bankruptcy_all, file = "bankruptcy_all.rda")
 
 ### knn for na imputation
 require(DMwR)
+load("bankruptcy.rda")
 for(i in 1:5){
   assign(paste0("year", i, "_knn"), knnImputation(bankruptcy[[i]]))
 }
 any(is.na(year1_knn))
+bankruptcy_knn = list(year1_knn, year2_knn, year3_knn, year4_knn, year5_knn)
+names(bankruptcy_knn) = c("year1_knn", "year2_knn", "year3_knn", "year4_knn", "year5_knn")
+save(bankruptcy_knn, file = "bankruptcy_knn.rda")
 
 ### smote sampling for unbalanced data
 
 ### corrplot for dimension reduction
+bankruptcy_knn = list(year1_knn, year2_knn, year3_knn, year4_knn, year5_knn)
+library(corrplot)
+
+for(i in 1:5){
+  res = cor(bankruptcy_knn[[i]][1:64], method = "pearson", use = "complete.obs")
+  corrplot(res, type = "upper", tl.col = "black", tl.srt = 45, order = "hclust")
+}
 
 ### random forest
+for(i in 1:5){
+  
+}
 
 ### if we rbind year1 to year5, can we predict the data come from which year preciously.
