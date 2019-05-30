@@ -7,6 +7,12 @@ for(i in 1:5){
 }
 bankruptcy = list(year1, year2, year3, year4, year5)
 
+## na detector
+load("data/bankruptcy_na_knn.rda")
+for(i in 1:5){
+  print(table(bankruptcy_na[[i]][65:66]))
+}
+
 ## missing value visualization
 library(tidyverse)
 for(i in 1:5){
@@ -150,31 +156,20 @@ for(i in 1:5){
 }
 
 ## MDS 2d
+load("data/bankruptcy_knn.rda")
 
-d = dist(year1)
-fit <- cmdscale(d,eig=TRUE, k=2)
-x = fit$points[,1]
-y = fit$points[,2]
-plot(x, y, xlab="Coordinate 1", ylab="Coordinate 2", main="Metric MDS", type="n")
-text(x, y, labels = row.names(year1), cex = 0.7)
+for(i in 1:5){
+  dist = dist(bankruptcy_knn[[i]][1:64])
+  fit = cmdscale(dist, eig = TRUE, k = 2)
+  x = fit$points[,1]
+  y = fit$points[,2]
+  plot(x, y, xlab = "Coordinate 1", ylab = "Coordinate 2", main = paste("Metric MDS Year", i), type = "n", col=as.integer(bankruptcy_knn[[i]]$class))
+  text(x, y, labels = row.names(bankruptcy_knn[[i]]), cex = 0.7)
+}
+
 
 ## MDS 3d
-load("bankruptcy_knn.rda")
-for(i in 1:5){
-  #Caclulate Dist. 
-  data.dist <- dist(bankruptcy_knn[[i]][1:64]) 
-  
-  #Calculate MDS 
-  data.mds <- cmdscale(data.dist, k=2) 
-  
-  #Create x,y refs 
-  data.x <- data.mds[,1] 
-  data.y <- -data.mds[,2] 
-  
-  #Plot 
-  plot(data.x, data.y, col=as.integer(bankruptcy_knn[[i]]$class)) 
-  
-}
+
 
 ## MDS 3d
 library(rgl)
