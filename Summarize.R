@@ -6,7 +6,7 @@ for(i in 1:5){
   assign(paste0("year", i), read.arff(paste0("data/", i, "year.arff")))
 }
 bankruptcy = list(year1, year2, year3, year4, year5)
-
+bank_all = rbind(year1, year2, year3, year4, year5)
 ## na detector
 load("data/bankruptcy_na_knn.rda")
 
@@ -14,6 +14,33 @@ for(i in 1:5){
   print(paste("Year", i))
   print(table(bankruptcy_na[[i]][65:66]))
 }
+NAs = NULL
+for(i in 1:64){
+  NAs[[i]] = sum(is.na(bank_all[,i]))
+}
+NAs[[65]] = sum(NAs)
+
+## text mining with NAs
+detector = read.csv("attribute_detector.csv")
+detector$NAs = NAs
+
+for(i in 1:64){
+  for(j in 2:37){
+    if(detector[i,j] == 1){
+      detector[i,j] = detector[i,39]
+    }
+  }
+}
+for(j in 2:37){
+  detector[65,j] = sum(detector[,j])
+}
+Raw_attribute = names(detector)[2:37]
+Count = NULL
+for(j in 2:37){
+  Count[(j-1)] = detector[65,j]
+}
+detector_count = data.frame(Raw_Attrubute = names(detector)[2:37], 
+                            Count = Count)
 
 ## missing value visualization
 library(tidyverse)
