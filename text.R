@@ -103,3 +103,5 @@ for(j in 1:length(term_unique)){
 }
 
 attribute_detector[65,37] = sum(attribute_detector[1:64,1:36])
+
+write.csv(attribute_detector, file = "attribute_detector.csv")
