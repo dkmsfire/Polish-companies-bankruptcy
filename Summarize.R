@@ -171,6 +171,12 @@ test = select[-train_index,-17]
 
 ## PCA
 library(ggbiplot)
+load("data/bankruptcy_knn.rda")
+for(i in 1:5){
+  pca = prcomp(bankruptcy_knn[[i]][1:64], scale = TRUE)
+  g = ggbiplot(pca, obs.scale = 1, var.scale = 1, groups = bankruptcy_knn[[i]][[65]], ellipse = TRUE, varname.size = 0)
+  print(g)
+}
 pca = prcomp(select, scale = TRUE)
 plot(pca, type = "line")
 abline(h = 1, col = "blue")
