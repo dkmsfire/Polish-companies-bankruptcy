@@ -8,15 +8,15 @@
    
    Basing on the collected data five classification cases were distinguished, that depends on the forecasting period: 
       
---- 1stYear the data contains financial rates from 1st year of the forecasting period and corresponding class label that indicates bankruptcy status after 5 years. The data contains 7027 instances (financial statements), 271 represents bankrupted companies, 6756 firms that did not bankrupt in the forecasting period. 
+   1stYear the data contains financial rates from 1st year of the forecasting period and corresponding class label that indicates bankruptcy status after 5 years. The data contains 7027 instances (financial statements), 271 represents bankrupted companies, 6756 firms that did not bankrupt in the forecasting period. 
 
---- 2ndYear the data contains financial rates from 2nd year of the forecasting period and corresponding class label that indicates bankruptcy status after 4 years. The data contains 10173 instances (financial statements), 400 represents bankrupted companies, 9773 firms that did not bankrupt in the forecasting period. 
+   2ndYear the data contains financial rates from 2nd year of the forecasting period and corresponding class label that indicates bankruptcy status after 4 years. The data contains 10173 instances (financial statements), 400 represents bankrupted companies, 9773 firms that did not bankrupt in the forecasting period. 
 
---- 3rdYear the data contains financial rates from 3rd year of the forecasting period and corresponding class label that indicates bankruptcy status after 3 years. The data contains 10503 instances (financial statements), 495 represents bankrupted companies, 10008 firms that did not bankrupt in the forecasting period. 
+   3rdYear the data contains financial rates from 3rd year of the forecasting period and corresponding class label that indicates bankruptcy status after 3 years. The data contains 10503 instances (financial statements), 495 represents bankrupted companies, 10008 firms that did not bankrupt in the forecasting period. 
 
---- 4thYear the data contains financial rates from 4th year of the forecasting period and corresponding class label that indicates bankruptcy status after 2 years. The data contains 9792 instances (financial statements), 515 represents bankrupted companies, 9277 firms that did not bankrupt in the forecasting period. 
+   4thYear the data contains financial rates from 4th year of the forecasting period and corresponding class label that indicates bankruptcy status after 2 years. The data contains 9792 instances (financial statements), 515 represents bankrupted companies, 9277 firms that did not bankrupt in the forecasting period. 
 
---- 5thYear the data contains financial rates from 5th year of the forecasting period and corresponding class label that indicates bankruptcy status after 1 year. The data contains 5910 instances (financial statements), 410 represents bankrupted companies, 5500 firms that did not bankrupt in the forecasting period.
+   5thYear the data contains financial rates from 5th year of the forecasting period and corresponding class label that indicates bankruptcy status after 1 year. The data contains 5910 instances (financial statements), 410 represents bankrupted companies, 5500 firms that did not bankrupt in the forecasting period.
 
 
 4. Dataset Information
@@ -34,9 +34,32 @@
    
    We can find that many attributes are collinear, we will do more dimensions reduction analysis. 
       
-7. Pictures/shiny
+7. In lecture questions
+
+   Notice non-statistic action
    
+   boxplot with 5 years 0/1.
    
-8. Shiny app
+   Missing value should show by years, don't combine them.
    
+   In proportion bankruptcy table, need to use chi-square test to convince.
+   
+   MDS is for ordinal data, we can't convince people easily, if we use MDS rather that PCA.
+   
+   MDS is try to solve problem where PCA can't solve ordinal data.
+   
+   why randomforest can do well in high-dimension data.
+   
+   add some basic plot in data exploratory.
+   
+   oversampling: how to generate the imbalance data.
+   
+   undersampling: how many times we do the random sampling would give us the reliable average result.
+   
+   maybe just focas on bankruptcy structure.
+   
+   in mnay models result, we should report the variation about results.
+   
+   we do a little about attributes, maybe in the next time, we should explore more.
+
 
