@@ -131,14 +131,22 @@ for(i in 1:5){
   }
 }
 
+
+ggplot(data = bankruptcy_knn[[1]], aes(x = bankruptcy_knn[[1]][[65]], y = bankruptcy_knn[[1]][[1]])) +
+  geom_boxplot() + xlab("Bankruptcy") + ylab(paste0("Attribute", 1))
+                                             
 ## boxplot to display each year.
-load("data/bankruptcy.rda")
+library(ggplot2)
+library(gridExtra)
+load("data/bankruptcy_knn.rda")
+
+## don't know why using ggplot2 the plot is NULL
 for(i in 1:5){
   for(j in 1:64){
-    assign(paste0("Attribute", j), ggplot(data = bankruptcy[[i]], aes(x = bankruptcy[[i]][[65]], y = bankruptcy[[i]][[j]]))) +
+    assign(paste0("Attribute", j), ggplot(data = bankruptcy_knn[[i]], aes(x = bankruptcy_knn[[i]][[65]], y = bankruptcy_knn[[i]][[j]]))) +
       geom_boxplot() + xlab("Bankruptcy") + ylab(paste0("Attribute", j))
   }
-  png(file = paste0("Year", i, ".png"), width = 1200, height = 1200)
+  png(file = paste0("Year", i, ".png"), width = 1440, height = 1440)
   grid.arrange(Attribute1, Attribute2, Attribute3, Attribute4, Attribute5, Attribute6, Attribute7, Attribute8,
                Attribute9, Attribute10, Attribute11, Attribute12, Attribute13, Attribute14, Attribute15, Attribute16,
                Attribute17, Attribute18, Attribute19, Attribute20, Attribute21, Attribute22, Attribute23, Attribute24,
@@ -150,6 +158,28 @@ for(i in 1:5){
   dev.off()
 }
 
+for(i in 1:5){
+  png(file = paste0("Year", i, ".png"), width = 1440, height = 1440)
+  par(mfrow = c(8,8))
+  for(j in 1:64){
+    boxplot(bankruptcy_knn[[i]][[j]] ~ bankruptcy_knn[[i]][[65]], ylab = paste0("Attribute", j), xlab = "Bankruptcy")
+  }
+  dev.off()
+}
+
+## each attribute and combining 5 years for 0 or 1
+load("data/bankruptcy_all_knn.rda")
+for(i in 1:5){
+  for(b in 0:1){
+    data = bankruptcy_all_knn[which(bankruptcy_all_knn[[65]] == b),]
+    png(file = paste0("All_Year_Bankruptcy=", b, ".png"), width = 1440, height = 1440)
+    par(mfrow = c(8,8))
+    for(j in 1:64){
+      boxplot(data[[j]] ~ data[[66]], ylab = paste0("Attribute", j), xlab = "Year")
+    }
+    dev.off()
+  }
+}
 
 ## heat map
 for(i in 1:64){
