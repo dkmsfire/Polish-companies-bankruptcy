@@ -219,6 +219,7 @@ ggbiplot(pca, obs.scale = 1, var.scale = 1, groups = year1[[65]], ellipse = TRUE
 ## Correlation Matrix
 library(corrplot)
 
+load("data/bankruptcy.rda")
 for(i in 1:5){
   res = cor(bankruptcy[[i]][1:64], method = "pearson", use = "complete.obs")
   corrplot(res, type = "upper", tl.col = "black", tl.srt = 45, order = "hclust")
