@@ -22,6 +22,16 @@ png(file = "NAcount.png")
 grid.arrange(plot1, plot2, plot3, plot4, plot5, plot6)
 dev.off()
 
+## chi-square 
+for(i in 1:5){
+  assign(paste0("NA", i), table(bankruptcy_na[[i]][65:66]))
+}
+NA_list = list(NA1, NA2, NA3, NA4, NA5)
+
+for(i in 1:5){
+  print(chisq.test(NA_list[[i]]))
+}
+## count na
 NAs = NULL
 for(i in 1:64){
   NAs[[i]] = sum(is.na(bank_all[,i]))
