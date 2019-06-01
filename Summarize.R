@@ -132,20 +132,22 @@ for(i in 1:5){
 }
 
 ## boxplot to display each year.
-load("data/bankruptcy_all_knn.rda")
-par(mfrow = c(4,4))
-for(j in 1:64){
-  boxplot(bankruptcy_all_knn[[j]] ~ bankruptcy_all_knn[[66]], col = factor(bankruptcy_all_knn[[66]]), main = paste0("Attribute", j), ylab = paste0("Attribute", j))
-}
-
-bankruptcy_all_knn_yes = bankruptcy_all_knn[which(bankruptcy_all_knn$class == 1),]
-for(j in 1:64){
-  boxplot(bankruptcy_all_knn_yes[[j]] ~ bankruptcy_all_knn_yes[[66]], col = factor(bankruptcy_all_knn_yes[[66]]), main = paste0("Attribute", j), ylab = paste0("Attribute", j))
-}
-
-bankruptcy_all_knn_no = bankruptcy_all_knn[which(bankruptcy_all_knn$class == 0),]
-for(j in 1:64){
-  boxplot(bankruptcy_all_knn_no[[j]] ~ bankruptcy_all_knn_no[[66]], col = factor(bankruptcy_all_knn_no[[66]]), main = paste0("Attribute", j), ylab = paste0("Attribute", j))
+load("data/bankruptcy.rda")
+for(i in 1:5){
+  for(j in 1:64){
+    assign(paste0("Attribute", j), ggplot(data = bankruptcy[[i]], aes(x = bankruptcy[[i]][[65]], y = bankruptcy[[i]][[j]]))) +
+      geom_boxplot() + xlab("Bankruptcy") + ylab(paste0("Attribute", j))
+  }
+  png(file = paste0("Year", i, ".png"), width = 1200, height = 1200)
+  grid.arrange(Attribute1, Attribute2, Attribute3, Attribute4, Attribute5, Attribute6, Attribute7, Attribute8,
+               Attribute9, Attribute10, Attribute11, Attribute12, Attribute13, Attribute14, Attribute15, Attribute16,
+               Attribute17, Attribute18, Attribute19, Attribute20, Attribute21, Attribute22, Attribute23, Attribute24,
+               Attribute25, Attribute26, Attribute27, Attribute28, Attribute29, Attribute30, Attribute31, Attribute32,
+               Attribute33, Attribute34, Attribute35, Attribute36, Attribute37, Attribute38, Attribute39, Attribute40,
+               Attribute41, Attribute42, Attribute43, Attribute44, Attribute45, Attribute46, Attribute47, Attribute48,
+               Attribute49, Attribute50, Attribute51, Attribute52, Attribute53, Attribute54, Attribute55, Attribute56,
+               Attribute57, Attribute58, Attribute59, Attribute60, Attribute61, Attribute62, Attribute63, Attribute64)
+  dev.off()
 }
 
 
