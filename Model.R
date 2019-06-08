@@ -81,3 +81,15 @@ model = randomForest(year ~ ., data = train)
 
 pred_test = predict(model, test, type = "response")
 mean(pred_test == test$year)
+
+
+### logistic regression without split
+library(ggplot2)
+
+load("data/bankruptcy_na_knn.rda")
+model = glm(class ~., data = bankruptcy_na[[1]], family=binomial(link="logit"))
+summary(model)
+
+ggplot(bankruptcy_na[[1]], aes(x = Attr2, y = class)) + geom_point(alpha = 0.5) +
+  stat_smooth(method = "glm", method.args = list(family = binomial), se = FALSE) + 
+  ylab("Bankruptcy") + ggtitle("Bankruptcy")
