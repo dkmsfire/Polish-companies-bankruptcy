@@ -41,14 +41,23 @@ NAs[[65]] = sum(NAs)
 
 ### na with number to show the bankruptcy company's missing value numbers
 load("data/bankruptcy_na_number.rda")
-for(i in 1:5){
-  assign(paste0("NumberofCompany", i), ggplot(data = bankruptcy_na_number[[i]], aes(x = 1:nrow(bankruptcy_na_number[[i]]), y = na, fill = class, color = class)) + 
-    geom_point(alpha = 0.5))
-}
-png(file = "png/NA of Company.png")
+NumberofCompany1 = ggplot(data = bankruptcy_na_number[[1]], aes(x = 1:nrow(bankruptcy_na_number[[1]]), y = na, fill = class, color = class)) + 
+  geom_point(alpha = 0.5) + xlab("Index") + ylab("Numbers of NA") + ggtitle("Year1")
+
+NumberofCompany2 = ggplot(data = bankruptcy_na_number[[2]], aes(x = 1:nrow(bankruptcy_na_number[[2]]), y = na, fill = class, color = class)) + 
+  geom_point(alpha = 0.5) + xlab("Index") + ylab("Numbers of NA") + ggtitle("Year2")
+
+NumberofCompany3 = ggplot(data = bankruptcy_na_number[[3]], aes(x = 1:nrow(bankruptcy_na_number[[3]]), y = na, fill = class, color = class)) + 
+  geom_point(alpha = 0.5) + xlab("Index") + ylab("Numbers of NA") + ggtitle("Year3")
+
+NumberofCompany4 = ggplot(data = bankruptcy_na_number[[4]], aes(x = 1:nrow(bankruptcy_na_number[[4]]), y = na, fill = class, color = class)) + 
+  geom_point(alpha = 0.5) + xlab("Index") + ylab("Numbers of NA") + ggtitle("Year4")
+
+NumberofCompany5 = ggplot(data = bankruptcy_na_number[[5]], aes(x = 1:nrow(bankruptcy_na_number[[5]]), y = na, fill = class, color = class)) + 
+  geom_point(alpha = 0.5) + xlab("Index") + ylab("Numbers of NA") + ggtitle("Year5")
+
+png(file = "png/NA of Company.png", height = 800, width= 800)
 grid.arrange(NumberofCompany1, NumberofCompany2, NumberofCompany3, NumberofCompany4, NumberofCompany5)
 dev.off()
 
-g = ggplot(data = bankruptcy_na_number[[1]], aes(x = 1:nrow(bankruptcy_na_number[[1]]), y = na, fill = class, color = class)) + 
-  geom_point(alpha = 0.5)
-print(g)
+
