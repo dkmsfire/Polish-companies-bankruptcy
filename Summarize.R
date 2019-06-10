@@ -247,23 +247,13 @@ for(i in 1:5){
   text(x, y, labels = row.names(bankruptcy_knn[[i]]), cex = 0.7)
 }
 
-
-## MDS 3d
-
-
-## MDS 3d
-library(rgl)
-#Caclulate Dist. 
-data.dist <- dist(bankruptcy_knn[[1]][1:64]) 
-
-#Calculate MDS 
-data.mds <- cmdscale(data.dist, k=3) 
-
-#Create x,y refs 
-data.x <- data.mds[,1] 
-data.y <- data.mds[,2] 
-data.z <- data.mds[,3] 
-
-#Plot 
-plot3d(data.x, data.y, data.z, col=as.integer(bankruptcy_knn[[1]]$class)) 
-### 3d plot the data only are on y-z axis, x = 0
+### PCA
+library(ggbiplot)
+load("data/bankruptcy_knn.rda")
+for(i in 1:5){
+  bankruptcy.pca = prcomp(bankruptcy_knn[[i]][1:64])
+  assign(paste0("PCA", i), ggbiplot(bankruptcy.pca, obs.scale = 1, var.scale = 1, groups = bankruptcy_knn[[i]][[65]], ellipse = TRUE, circle = TRUE, varname.size = 0) + ggtitle(paste0("PCA for Year", i)))
+}
+png(file = "PCA.png", height = 800, width = 800)
+grid.arrange(PCA1, PCA2, PCA3, PCA4, PCA5)
+dev.off()
