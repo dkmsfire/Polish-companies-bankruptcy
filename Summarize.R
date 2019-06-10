@@ -7,6 +7,14 @@ for(i in 1:5){
 }
 bankruptcy = list(year1, year2, year3, year4, year5)
 bank_all = rbind(year1, year2, year3, year4, year5)
+### sum na
+for(i in 1:5){
+  for(j in 1:nrow(bankruptcy[[i]])){
+    bankruptcy[[i]]$na[[j]] = sum(is.na(bankruptcy[[i]][j,]))
+  }
+}
+bankruptcy_na_number = bankruptcy
+save(bankruptcy_na_number, file = "bankruptcy_na_number.rda")
 ## na detector
 load("data/bankruptcy_na_knn.rda")
 
