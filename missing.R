@@ -60,4 +60,3 @@ png(file = "png/NA of Company.png", height = 800, width= 800)
 grid.arrange(NumberofCompany1, NumberofCompany2, NumberofCompany3, NumberofCompany4, NumberofCompany5)
 dev.off()
 
-
