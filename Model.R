@@ -93,3 +93,28 @@ summary(model)
 ggplot(bankruptcy_na[[1]], aes(x = Attr2, y = class)) + geom_point(alpha = 0.5) +
   stat_smooth(method = "glm", method.args = list(family = binomial), se = FALSE) + 
   ylab("Bankruptcy") + ggtitle("Bankruptcy")
+
+
+### decision tree
+library(rpart)
+library(partykit)
+library(gridExtra)
+load("data/bankruptcy_na_number.rda")
+model = rpart(class ~ ., data = bankruptcy_na_number[[1]])
+tree = as.party(model)
+plot(tree)
+
+for(i in 1:5){
+  model = rpart(class ~ ., data = bankruptcy_na_number[[i]])
+  png(file = paste0("png/Decision Tree", i, ".png"), height = 1440, width = 1440)
+  rpart.plot(model, box.palette="RdBu", shadow.col="gray", nn=TRUE)
+  dev.off()
+}
+
+for(i in 1:5){
+  model = rpart(class ~ ., data = bankruptcy_na_number[[i]])
+  png(file = paste0("png/Decision Tree", i, ".png"), height = 1440, width = 1440)
+  tree = as.party(model)
+  plot(tree, main = paste("Year", i))
+  dev.off()
+}
