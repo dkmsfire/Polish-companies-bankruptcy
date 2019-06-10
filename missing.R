@@ -37,3 +37,18 @@ for(i in 1:64){
   NAs[[i]] = sum(is.na(bank_all[,i]))
 }
 NAs[[65]] = sum(NAs)
+
+
+### na with number to show the bankruptcy company's missing value numbers
+load("data/bankruptcy_na_number.rda")
+for(i in 1:5){
+  assign(paste0("NumberofCompany", i), ggplot(data = bankruptcy_na_number[[i]], aes(x = 1:nrow(bankruptcy_na_number[[i]]), y = na, fill = class, color = class)) + 
+    geom_point(alpha = 0.5))
+}
+png(file = "png/NA of Company.png")
+grid.arrange(NumberofCompany1, NumberofCompany2, NumberofCompany3, NumberofCompany4, NumberofCompany5)
+dev.off()
+
+g = ggplot(data = bankruptcy_na_number[[1]], aes(x = 1:nrow(bankruptcy_na_number[[1]]), y = na, fill = class, color = class)) + 
+  geom_point(alpha = 0.5)
+print(g)
