@@ -303,3 +303,28 @@ for(i in 1:5){
 png(file = "PCA.png", height = 800, width = 800)
 grid.arrange(PCA1, PCA2, PCA3, PCA4, PCA5)
 dev.off()
+
+
+### centroid
+load("data/bankruptcy_knn.rda")
+bankrupt = bankruptcy_knn[[1]][which(bankruptcy_knn[[1]]$class == 1),]
+nonbankrupt = bankruptcy_knn[[1]][which(bankruptcy_knn[[1]]$class == 0),]
+
+
+bankrupt = year1[which(year1$class == 1),]
+nonbankrupt = year1[which(year1$class == 0),]
+
+for(i in 1:64){
+  year1[7028,i] = mean(bankrupt[,i], na.rm = TRUE)
+  year1[7029,i] = mean(nonbankrupt[,i], na.rm = TRUE)
+}
+
+bankrupt_centroid = NULL
+nonbankrupt_centroid = NULL
+
+for(i in 1:64){
+  bankrupt_centroid[[i]] = mean(bankrupt[,i], na.rm = TRUE)
+  nonbankrupt_centroid[[i]] = mean(nonbankrupt[,i], na.rm = TRUE)
+}
+centroid = data.frame(bankrupt_centroid, nonbankrupt_centroid)
+centroid_knn = data.frame(bankrupt_centroid, nonbankrupt_centroid)
