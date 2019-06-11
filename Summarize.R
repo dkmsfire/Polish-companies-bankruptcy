@@ -74,7 +74,7 @@ NA_dectector$Year2 = Year2NA_detector[[2]]
 NA_dectector$Year3 = Year3NA_detector[[2]]
 NA_dectector$Year4 = Year4NA_detector[[2]]
 NA_dectector$Year5 = Year5NA_detector[[2]]
-save(NA_dectector, file = "NA.dectector.csv")
+write.csv(NA_dectector, file = "NA.dectector.csv", row.names = FALSE)
 
 detector$NAs = NAs[,1]
 
