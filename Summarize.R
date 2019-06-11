@@ -15,6 +15,14 @@ for(i in 1:5){
 }
 bankruptcy_na_number = bankruptcy
 save(bankruptcy_na_number, file = "bankruptcy_na_number.rda")
+## boxplot of na number
+load("data/bankruptcy_na_number.rda")
+for(i in 1:5){
+  boxplot(bankruptcy_na_number[[i]][66])
+}
+
+
+
 ## na detector
 load("data/bankruptcy_na_knn.rda")
 
@@ -278,9 +286,10 @@ library(corrplot)
 load("data/bankruptcy.rda")
 for(i in 1:5){
   res = cor(bankruptcy[[i]][1:64], method = "pearson", use = "complete.obs")
-  corrplot(res, type = "upper", tl.col = "black", tl.srt = 45, order = "hclust")
+  corrplot(res, type = "upper", tl.col = "black", tl.srt = 45)
 }
 
+# , order = "hclust"
 ## MDS 2d
 load("data/bankruptcy_knn.rda")
 
@@ -328,3 +337,9 @@ for(i in 1:64){
 }
 centroid = data.frame(bankrupt_centroid, nonbankrupt_centroid)
 centroid_knn = data.frame(bankrupt_centroid, nonbankrupt_centroid)
+
+### in undersampling, we want to find the non-bankrupt cluster that are not far from the bankrupt cluster 
+### we want to find bankrupt cluster centroid and calculate the distance with each point of non-bankrupt cluster and bankrupt centriod
+### to use the less of the median of the distance.
+
+
