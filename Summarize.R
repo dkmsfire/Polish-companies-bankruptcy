@@ -42,7 +42,41 @@ NAs[[65]] = sum(NAs)
 
 ## text mining with NAs
 detector = read.csv("attribute_detector.csv")
-detector$NAs = NAs
+for(y in 1:5){
+  detector = read.csv("attribute_detector.csv")
+  detector$NAs = NAs[,y]
+  
+  for(i in 1:64){
+    for(j in 2:37){
+      if(detector[i,j] == 1){
+        detector[i,j] = detector[i,39]
+      }
+    }
+  }
+  
+  for(j in 2:37){
+    detector[65,j] = sum(detector[,j])
+  }
+  
+  Raw_attribute = names(detector)[2:37]
+  Count = NULL
+  for(j in 2:37){
+    Count[(j-1)] = detector[65,j]
+  }
+  
+  assign(paste0("Year", y, "NA_detector"), data.frame(Raw_Attrubute = names(detector)[2:37], 
+                              Count = Count))
+}
+
+NA_dectector = Year1NA_detector
+names(NA_dectector) = c("Unique_Term", "Year1")
+NA_dectector$Year2 = Year2NA_detector[[2]]
+NA_dectector$Year3 = Year3NA_detector[[2]]
+NA_dectector$Year4 = Year4NA_detector[[2]]
+NA_dectector$Year5 = Year5NA_detector[[2]]
+save(NA_dectector, file = "NA.dectector.csv")
+
+detector$NAs = NAs[,1]
 
 for(i in 1:64){
   for(j in 2:37){
