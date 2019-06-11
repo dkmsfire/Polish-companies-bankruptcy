@@ -22,6 +22,18 @@ for(i in 1:5){
   print(paste("Year", i))
   print(table(bankruptcy_na[[i]][65:66]))
 }
+
+# one year attribute NA number
+NAs = matrix(data = NA, nrow = 65, ncol = 5)
+colnames(NAs) = c("Year1", "Year2", "Year3", "Year4", "Year5")
+for(i in 1:5){
+  for(j in 1:64){
+    NAs[j,i] = sum(is.na(bankruptcy[[i]][,j]))
+  }
+  NAs[65,i] = sum(NAs[1:64,i])
+}
+
+# 5 years attribute NA number
 NAs = NULL
 for(i in 1:64){
   NAs[[i]] = sum(is.na(bank_all[,i]))
