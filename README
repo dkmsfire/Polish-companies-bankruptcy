@@ -1,5 +1,7 @@
 1. Title: Polish companies bankruptcy
 
+   https://archive.ics.uci.edu/ml/datasets/Polish+companies+bankruptcy+data?fbclid=IwAR0vZk-aykpp_nW1_4AP5Oqu_BXlNCnxPNpoYk8nWyFxJj2GNDPYuwPcfYM
+
 2. Abstract: 
 
    The dataset is about bankruptcy prediction of Polish companies. The data was collected from Emerging Markets Information Service (EMIS, [Web Link]), which is a database containing information on emerging markets around the world. The bankrupt companies were analyzed in the period 2000-2012, while the still operating companies were evaluated from 2007 to 2013.
@@ -34,32 +36,11 @@
    
    We can find that many attributes are collinear, we will do more dimensions reduction analysis. 
       
-7. In lecture questions
+7. Result
 
-   Notice non-statistic action
+   By many trials with undersampling or without undersampling, the results are still can separate well.
+   When the bankrupt companies increasing, the result take side with bankruptcy.
+   When the non-bankrupt companies are in majority, the result guess non-bankruptcy.
    
-   boxplot with 5 years 0/1.
-   
-   Missing value should show by years, don't combine them.
-   
-   In proportion bankruptcy table, need to use chi-square test to convince.
-   
-   MDS is for ordinal data, we can't convince people easily, if we use MDS rather that PCA.
-   
-   MDS is try to solve problem where PCA can't solve ordinal data.
-   
-   why randomforest can do well in high-dimension data.
-   
-   add some basic plot in data exploratory.
-   
-   oversampling: how to generate the imbalance data.
-   
-   undersampling: how many times we do the random sampling would give us the reliable average result.
-   
-   maybe just focas on bankruptcy structure.
-   
-   in mnay models result, we should report the variation about results.
-   
-   we do a little about attributes, maybe in the next time, we should explore more.
-
+   It's hard to find some better separation method in this data.
 
